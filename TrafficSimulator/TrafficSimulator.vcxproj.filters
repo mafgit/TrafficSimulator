@@ -26,7 +26,7 @@
     <ClInclude Include="Vehicle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EdgeTo.hpp">
+    <ClInclude Include="Edge.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ListNode.hpp">

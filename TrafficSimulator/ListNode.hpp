@@ -6,7 +6,7 @@ template <typename T> struct ListNode {
 	T data;
 	ListNode* next;
 
-	ListNode(T data) : data(data) {}
+	ListNode(T data) : data(data) { next = NULL; }
 	ListNode(int size, T data) {
 		this->data = data;
 		ListNode<T>* ptr = this;
@@ -18,7 +18,7 @@ template <typename T> struct ListNode {
 	}
 };
 
-template <typename T> void push(ListNode<T>* head, T data) {
+template <typename T> void push(ListNode<T>*& head, T data) {
 	if (head == NULL) {
 		head = new ListNode<T>(data);
 		return;

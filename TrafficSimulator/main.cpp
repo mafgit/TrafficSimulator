@@ -1,24 +1,23 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Graph.hpp"
-
+#include "Vehicle.hpp"
 using namespace std;
 
 int main() {
-	Graph network(6);
-	network.addEdge(1, 2, 4);
-	network.addEdge(1, 5, 4);
-	network.addEdge(1, 6, 4);
-	network.addEdge(2, 3, 4);
-	network.addEdge(3, 4, 4);
-	network.addEdge(4, 6, 4);
-	network.addEdge(5, 4, 4);
-	network.addEdge(6, 5, 4);
+    Graph graph(4);
+    graph.addVertex(1, sf::Vector2f(10, 10));
+    graph.addVertex(2, sf::Vector2f(300, 10));
+    graph.addVertex(3, sf::Vector2f(300, 300));
+    graph.addVertex(4, sf::Vector2f(10, 300));
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    graph.addEdge(1, 2, 1);
+    graph.addEdge(2, 3, 1);
+    graph.addEdge(3, 4, 1);
+    graph.addEdge(4, 1, 1);
 
+    sf::RenderWindow window(sf::VideoMode(640, 640), "Traffic Simulator");
+    sf::Clock clock;
     while (window.isOpen())
     {
         sf::Event event;
@@ -28,10 +27,12 @@ int main() {
                 window.close();
         }
 
-        window.clear();
-        window.draw(shape);
+        //float dt = clock.restart().asSeconds();
+        //vehicle1.update(dt);
+        graph.draw(window);
         window.display();
     }
 
     return 0;
 }
+
