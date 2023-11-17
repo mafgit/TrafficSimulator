@@ -7,15 +7,10 @@ using namespace std;
 
 class Graph {
 	map<int, ListNode<Edge>*> adjList;
-	map<int, sf::Vector2f> vertices;
-	// int:   list:
-	// 	1:	 { {2, 2.5}, {3, 1.5}, {4, 2.3} }
-	// 	2:   { {3, 2.5}, {4, 5}, {1, 3} }
-	// 	3:  ...
-	// 	4:  ...
 	int V;
 
 public:
+	map<int, sf::Vector2f> vertices;
 	Graph(int V) : V(V) {}
 
 	void addVertex(int v, sf::Vector2f position) {
@@ -61,10 +56,10 @@ public:
 
 
 	void addEdge(int from, int to, double cost) {
-		cout << "(" << vertices[to].x << ", ";
-		cout << vertices[to].y << ")\n";
-		cout << "(" << vertices[from].x << ", ";
-		cout << vertices[from].y << ")\n\n";
+		//cout << "(" << vertices[to].x << ", ";
+		//cout << vertices[to].y << ")\n";
+		//cout << "(" << vertices[from].x << ", ";
+		//cout << vertices[from].y << ")\n\n";
 		push(adjList[from], Edge(from, to, vertices[from], vertices[to], cost)); // edge added for from ---> to
 	}
 

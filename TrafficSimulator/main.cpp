@@ -16,6 +16,8 @@ int main() {
     graph.addEdge(3, 4, 1);
     graph.addEdge(4, 1, 1);
 
+    Vehicle vehicle1(sf::Color::Green, sf::Vector2f(10,10), sf::Vector2f(30, 0), 1, 2);
+
     sf::RenderWindow window(sf::VideoMode(640, 640), "Traffic Simulator");
     sf::Clock clock;
     while (window.isOpen())
@@ -27,9 +29,13 @@ int main() {
                 window.close();
         }
 
-        //float dt = clock.restart().asSeconds();
-        //vehicle1.update(dt);
+        window.clear();
         graph.draw(window);
+
+        float dt = clock.restart().asSeconds();
+        vehicle1.update(dt, graph.vertices);
+        vehicle1.draw(window);
+        
         window.display();
     }
 

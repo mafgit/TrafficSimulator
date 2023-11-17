@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "Graph.hpp"
 using namespace std;
 
 class Vehicle {
@@ -19,14 +20,26 @@ public:
 		this->to = to;
 	}
 
-	void update(float dt) {
-		position += velocity * dt;
+	bool near(sf::Vector2f a, sf::Vector2f b) {
+		float x = abs(b.x - a.x);
+		float y = abs(b.y - a.y);
+		return (x < 1 && y < 1);
+	}
+
+	void update(float dt, map<int, sf::Vector2f> vertices) {
+		cout << position.x << "," << position.y << "  " << vertices[to].x << "," << vertices[to].y << endl;
+		if (!near(position, vertices[to])) {
+			position += velocity * dt;
+		}
+		else {
+			velocity = sf::Vector2f(0, 0);
+		}
 	}
 
 	void draw(sf::RenderWindow& window) {
 		sf::RectangleShape vehicleShape(sf::Vector2f(30, 20));
 		vehicleShape.setPosition(position);
-		vehicleShape.setFillColor(sf::Color::Blue);
+		vehicleShape.setFillColor(sf::Color::Green);
 		window.draw(vehicleShape);
 
 	}
