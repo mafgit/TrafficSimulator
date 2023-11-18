@@ -5,26 +5,28 @@
 using namespace std;
 
 int main() {
-    Graph graph(4);
+    Graph graph;
     graph.addVertex(1, sf::Vector2f(10, 10));
     graph.addVertex(2, sf::Vector2f(300, 10));
     graph.addVertex(3, sf::Vector2f(300, 300));
     graph.addVertex(4, sf::Vector2f(10, 300));
-
+    graph.addVertex(5, sf::Vector2f(300, 600));
+    
     graph.addEdge(1, 2, 1);
     graph.addEdge(2, 3, 1);
     graph.addEdge(3, 4, 1);
     graph.addEdge(4, 1, 1);
+    graph.addEdge(5, 3, 1);
 
-    Vehicle vehicle1(sf::Color::Green, sf::Vector2f(10,10), sf::Vector2f(30, 0), 1, 2);
+    Vehicle vehicle1(graph, sf::Color::Green, sf::Vector2f(10,10), 1, 4);
 
-    ListNode<float>* distances = graph.dijkstra(1);
+    ListNode<float>* distances = graph.dijkstra(2);
     ListNode<float>* ptr = distances;
     while (ptr != NULL) {
-        cout << ptr->data << endl;
+        //cout << ptr->data << endl;
         ptr = ptr->next;
     }
-
+    
     sf::RenderWindow window(sf::VideoMode(640, 640), "Traffic Simulator");
     sf::Clock clock;
     while (window.isOpen())
@@ -40,7 +42,7 @@ int main() {
         graph.draw(window);
 
         float dt = clock.restart().asSeconds();
-        vehicle1.update(dt, graph.vertices);
+        vehicle1.update(dt, graph);
         vehicle1.draw(window);
         
         window.display();

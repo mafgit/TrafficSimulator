@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include "ListNode.hpp"
-#include "Vehicle.hpp"
 using namespace std;
 
 struct Edge {

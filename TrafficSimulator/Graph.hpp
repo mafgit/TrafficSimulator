@@ -12,10 +12,13 @@ class Graph {
 
 public:
 	map<int, sf::Vector2f> vertices;
-	Graph(int V) : V(V) {}
+	Graph() {
+		V = 0;
+	}
 
 	void addVertex(int v, sf::Vector2f position) {
 		vertices[v] = position;
+		V++;
 	}
 
 	void draw(sf::RenderWindow& window) {
