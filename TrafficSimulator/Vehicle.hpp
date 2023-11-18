@@ -23,7 +23,7 @@ public:
 	bool near(sf::Vector2f a, sf::Vector2f b) {
 		float x = abs(b.x - a.x);
 		float y = abs(b.y - a.y);
-		return (x < 1 && y < 1);
+		return (x < 5.0 && y < 5.0);
 	}
 
 	void update(float dt, map<int, sf::Vector2f> vertices) {

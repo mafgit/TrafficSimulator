@@ -18,6 +18,13 @@ int main() {
 
     Vehicle vehicle1(sf::Color::Green, sf::Vector2f(10,10), sf::Vector2f(30, 0), 1, 2);
 
+    ListNode<float>* distances = graph.dijkstra(1);
+    ListNode<float>* ptr = distances;
+    while (ptr != NULL) {
+        cout << ptr->data << endl;
+        ptr = ptr->next;
+    }
+
     sf::RenderWindow window(sf::VideoMode(640, 640), "Traffic Simulator");
     sf::Clock clock;
     while (window.isOpen())

@@ -19,11 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graph.hpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Edge.hpp" />
+    <ClInclude Include="Graph.hpp" />
     <ClInclude Include="ListNode.hpp" />
     <ClInclude Include="Vehicle.hpp" />
   </ItemGroup>

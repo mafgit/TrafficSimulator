@@ -9,10 +9,10 @@ struct Edge {
 	int to;
 	sf::Vector2f fromPos;
 	sf::Vector2f toPos;
-	double cost;
+	float cost;
 	//ListNode<Vehicle>* vehicles;
 
-	Edge(int from, int to, sf::Vector2f fromPos, sf::Vector2f toPos, double cost) : from(from), to(to), fromPos(fromPos), toPos(toPos), cost(cost) {
+	Edge(int from, int to, sf::Vector2f fromPos, sf::Vector2f toPos, float cost) : from(from), to(to), fromPos(fromPos), toPos(toPos), cost(cost) {
 		//vehicles = NULL;
 	}
 };
