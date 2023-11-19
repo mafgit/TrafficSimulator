@@ -11,10 +11,13 @@ public:
 	sf::Vector2f position;
 	sf::Vector2f velocity;
 	sf::Color color;
+	int rotation;
+	/*int width;
+	int height;*/
 	// int a, b;
 
-	Vehicle(Graph& graph, sf::Color color, sf::Vector2f position, int from, int destination) {
-		this->position = position;
+	Vehicle(Graph& graph, sf::Color color, int from, int destination)  {
+		this->position = graph.vertices[from];
 		this->color = color;
 		this->from = from;
 		this->destination = destination;
@@ -22,18 +25,22 @@ public:
 		
 		this->to = getClosestVertex(graph, from);
 		this->velocity = calcVelocity(position, graph.vertices[to]);
+		
+		rotation = 0;
+		/*width = 30;
+		height = 20;*/
 		//cout << "Closest vertex from " << from << " is " << to << endl;
-		cout << "From: " << from << endl;
+		/*cout << "From: " << from << endl;
 		cout << "To: " << to << endl;
 		cout << "Position: (" << position.x << ", " << position.y << ")" << endl;
 		cout << "Velocity: (" << velocity.x << ", " << velocity.y << ")" << endl << endl;
-
+		*/
 	}
 
 	bool near(sf::Vector2f a, sf::Vector2f b) {
 		float x = abs(b.x - a.x);
 		float y = abs(b.y - a.y);
-		return (x < 5.0 && y < 5.0);
+		return (x < 1.0 && y < 1.0);
 	}
 
 	int getClosestVertex(Graph graph, int from) {
@@ -64,28 +71,36 @@ public:
 	void update(float dt, Graph graph) {
 		//cout << position.x << "," << position.y << "  " << graph.vertices[to].x << "," << graph.vertices[to].y << endl;
 		if (near(position, graph.vertices[to])) {
+			rotation = (rotation == 90 ? 0 : 90);
 			if (to == destination) {
 				from = destination;
 				to = destination;
 				velocity = sf::Vector2f(0, 0);
+				rotation = 0;
 			}
 			else {
 				from = to;
 				to = getClosestVertex(graph, to);
 				velocity = calcVelocity(position, graph.vertices[to]);
-				}
+			}
+
+
+
 		}
 		else {
 			position += velocity * dt;
 			//cout << "Velocity: (" << velocity.x << ", " << velocity.y << ")" << endl;
 		}
+
+
 	}
 
 	void draw(sf::RenderWindow& window) {
-		sf::RectangleShape vehicleShape(sf::Vector2f(30, 20));
-		vehicleShape.setPosition(position);
-		vehicleShape.setFillColor(color);
-		window.draw(vehicleShape);
+		sf::RectangleShape shape(sf::Vector2f(30, 20));
+		shape.setRotation(rotation);
+		shape.setPosition(position + sf::Vector2f(25, 25));
+		shape.setFillColor(color);
+		window.draw(shape);
 	}
 
 };

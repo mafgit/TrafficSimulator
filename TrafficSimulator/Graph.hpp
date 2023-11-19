@@ -48,7 +48,7 @@ public:
 		for (auto i = vertices.begin(); i != vertices.end(); i++) {
 			sf::RectangleShape shape(sf::Vector2f(50, 50));
 			shape.setPosition(i->second);
-			shape.setFillColor(sf::Color::Blue);
+			shape.setFillColor(sf::Color::White);
 			window.draw(shape);
 		}
 
