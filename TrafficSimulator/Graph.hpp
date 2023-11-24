@@ -52,10 +52,11 @@ public:
 			window.draw(shape);
 		}
 
-		sf::Vertex line[] = {
-			sf::Vertex(sf::Vector2f(0,0)),
-			sf::Vertex(sf::Vector2f(300,300))
-		};
+
+		//sf::Vertex line[] = {
+		//	sf::Vertex(sf::Vector2f(0,0)),
+		//	sf::Vertex(sf::Vector2f(300,300))
+		//};
 	}
 
 

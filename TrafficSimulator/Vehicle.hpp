@@ -12,6 +12,7 @@ public:
 	sf::Vector2f velocity;
 	sf::Color color;
 	int rotation;
+	sf::RectangleShape shape;
 	/*int width;
 	int height;*/
 	// int a, b;
@@ -26,7 +27,9 @@ public:
 		this->to = getClosestVertex(graph, from);
 		this->velocity = calcVelocity(position, graph.vertices[to]);
 		
-		rotation = 0;
+		shape.setSize(sf::Vector2f(30, 20));
+		shape.setPosition(position);
+		rotation = velocity.x ? 0 : 90;
 		/*width = 30;
 		height = 20;*/
 		//cout << "Closest vertex from " << from << " is " << to << endl;
@@ -40,7 +43,7 @@ public:
 	bool near(sf::Vector2f a, sf::Vector2f b) {
 		float x = abs(b.x - a.x);
 		float y = abs(b.y - a.y);
-		return (x < 1.0 && y < 1.0);
+		return (x < 5.0 && y < 5.0);
 	}
 
 	int getClosestVertex(Graph graph, int from) {
@@ -63,8 +66,8 @@ public:
 
 	sf::Vector2f calcVelocity(sf::Vector2f a, sf::Vector2f b) {
 		sf::Vector2f vel = b - a;
-		vel.x /= 5;
-		vel.y /= 5;
+		vel.x /= 3;
+		vel.y /= 3;
 		return vel;
 	}
 
@@ -76,6 +79,7 @@ public:
 				from = destination;
 				to = destination;
 				velocity = sf::Vector2f(0, 0);
+				//position = sf::Vector2f(-100, -100);
 				rotation = 0;
 			}
 			else {
@@ -96,9 +100,8 @@ public:
 	}
 
 	void draw(sf::RenderWindow& window) {
-		sf::RectangleShape shape(sf::Vector2f(30, 20));
 		shape.setRotation(rotation);
-		shape.setPosition(position + sf::Vector2f(25, 25));
+		shape.setPosition(position - sf::Vector2f(20, 20));
 		shape.setFillColor(color);
 		window.draw(shape);
 	}

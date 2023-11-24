@@ -25,8 +25,12 @@ int main() {
     graph.addEdge(2, 1, 1);
     graph.addEdge(1, 4, 1);
     
-    Vehicle vehicle1(graph, sf::Color::Green, 4, 1);
-    Vehicle vehicle2(graph, sf::Color::Red, 5, 8);
+    Vehicle vehicles[] = { 
+        Vehicle(graph, sf::Color::Green, 4, 1),
+        Vehicle(graph, sf::Color::Red, 5, 8),
+        Vehicle(graph, sf::Color::Blue, 3, 2)
+    };
+    int numVehicles = sizeof(vehicles) / sizeof(Vehicle);
 
     ListNode<float>* distances = graph.dijkstra(2);
     ListNode<float>* ptr = distances;
@@ -50,10 +54,18 @@ int main() {
         graph.draw(window);
 
         float dt = clock.restart().asSeconds();
-        vehicle1.update(dt, graph);
-        vehicle1.draw(window);
-        vehicle2.update(dt, graph);
-        vehicle2.draw(window);
+        for (int i = 0; i < numVehicles; i++) {
+            vehicles[i].update(dt, graph);
+            vehicles[i].draw(window);
+
+            for (int j = 0; j < numVehicles; j++) {
+                if (i == j) continue;
+                if (vehicles[i].shape.getGlobalBounds().intersects(vehicles[j].shape.getGlobalBounds())) {
+                    cout << "Collision";
+                    vehicles[i].velocity = sf::Vector2f(0,0);
+                }
+            }
+        }
         
         window.display();
     }
