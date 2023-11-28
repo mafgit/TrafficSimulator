@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <string>
 #include <map>
 #include <queue>
 #include "Edge.hpp"
@@ -39,7 +40,7 @@ public:
 					size.y = 50;
 				}
 				road.setSize(size);
-				window.draw(road);
+				// window.draw(road);
 				ptr = ptr->next;
 			}
 		}
@@ -48,8 +49,20 @@ public:
 		for (auto i = vertices.begin(); i != vertices.end(); i++) {
 			sf::RectangleShape shape(sf::Vector2f(50, 50));
 			shape.setPosition(i->second);
+			shape.setOrigin(sf::Vector2f(25,25));
 			shape.setFillColor(sf::Color::White);
 			window.draw(shape);
+
+			// drawing text
+			sf::Text text;
+			sf::Font font;
+			font.loadFromFile("Arial.ttf");
+			text.setFont(font);
+			text.setString(to_string(i->first));
+			text.setPosition(i->second);
+			text.setCharacterSize(24);
+			text.setFillColor(sf::Color::White);
+			window.draw(text);
 		}
 
 

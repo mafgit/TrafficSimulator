@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <stack>
 #include "Graph.hpp"
 using namespace std;
 
@@ -13,6 +14,8 @@ public:
 	sf::Color color;
 	int rotation;
 	sf::RectangleShape shape;
+	stack<int> route;
+
 	/*int width;
 	int height;*/
 	// int a, b;
@@ -43,7 +46,14 @@ public:
 	bool near(sf::Vector2f a, sf::Vector2f b) {
 		float x = abs(b.x - a.x);
 		float y = abs(b.y - a.y);
-		return (x < 5.0 && y < 5.0);
+		return (x < 1.5 && y < 1.5);
+	}
+
+	void setRoute(stack<int> routeStack) {
+		while (!routeStack.empty()) {
+			route.push(routeStack.top());
+			routeStack.pop();
+		}
 	}
 
 	int getClosestVertex(Graph graph, int from) {
@@ -68,12 +78,21 @@ public:
 		sf::Vector2f vel = b - a;
 		vel.x /= 3;
 		vel.y /= 3;
-		return vel;
+		/*
+		if (vel.x > vel.y) {
+			vel.y = 0;
+		}
+		else if (vel.y > vel.x) {
+			vel.x = 0;
+		}
+
+		return vel;*/
 	}
 
 	void update(float dt, Graph graph) {
 		//cout << position.x << "," << position.y << "  " << graph.vertices[to].x << "," << graph.vertices[to].y << endl;
 		if (near(position, graph.vertices[to])) {
+			cout << "NEAR";
 			rotation = (rotation == 90 ? 0 : 90);
 			if (to == destination) {
 				from = destination;
@@ -83,6 +102,17 @@ public:
 				rotation = 0;
 			}
 			else {
+				if (velocity.x > 0) {
+					position.x += 20;
+				}
+				else if (velocity.x < 0) {
+					position.x -= 20;
+				} else if (velocity.y > 0) {
+					position.y += 30;
+				}
+				else if (velocity.y < 0) {
+					position.y -= 20;
+				}
 				from = to;
 				to = getClosestVertex(graph, to);
 				velocity = calcVelocity(position, graph.vertices[to]);
@@ -101,7 +131,7 @@ public:
 
 	void draw(sf::RenderWindow& window) {
 		shape.setRotation(rotation);
-		shape.setPosition(position - sf::Vector2f(20, 20));
+		shape.setPosition(position /* + sf::Vector2f(40, 30)*/);
 		shape.setFillColor(color);
 		window.draw(shape);
 	}

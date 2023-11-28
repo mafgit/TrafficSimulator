@@ -25,10 +25,10 @@ int main() {
     graph.addEdge(2, 1, 1);
     graph.addEdge(1, 4, 1);
     
-    Vehicle vehicles[] = { 
+    Vehicle vehicles[] = {
         Vehicle(graph, sf::Color::Green, 4, 1),
-        Vehicle(graph, sf::Color::Red, 5, 8),
-        Vehicle(graph, sf::Color::Blue, 3, 2)
+        //Vehicle(graph, sf::Color::Red, 5, 8),
+        //Vehicle(graph, sf::Color::Blue, 3, 2)
     };
     int numVehicles = sizeof(vehicles) / sizeof(Vehicle);
 
