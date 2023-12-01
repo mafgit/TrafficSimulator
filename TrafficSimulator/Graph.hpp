@@ -1,6 +1,5 @@
 #pragma once
 #include <iostream>
-#include <string>
 #include <map>
 #include <queue>
 #include "Edge.hpp"
@@ -17,6 +16,7 @@ public:
 		V = 0;
 	}
 
+
 	void addVertex(int v, sf::Vector2f position) {
 		vertices[v] = position;
 		V++;
@@ -25,46 +25,246 @@ public:
 	void draw(sf::RenderWindow& window) {
 
 		// drawing lines
+		bool flag1 = 0;
 		for (auto i = adjList.begin(); i != adjList.end(); i++) {
 			ListNode<Edge>* ptr = i->second;
 			while (ptr != NULL) {
 				sf::RectangleShape road;
-				road.setPosition(ptr->data.fromPos);
-				sf::Vector2f size = ptr->data.toPos - ptr->data.fromPos;
-
-				if (size.x < 50 && size.x > -50) {
-					size.x = 50;
+				if (flag1 == 0) {
+					flag1 = 1;
+					continue;
 				}
 
-				if (size.y < 50 && size.y > -50) {
-					size.y = 50;
+				else {
+					road.setPosition(ptr->data.fromPos);
+					sf::Vector2f size = ptr->data.toPos - ptr->data.fromPos;
+
+					if (size.x < 50 && size.x > -50) {
+						size.x = 50;
+					}
+
+					if (size.y < 50 && size.y > -50) {
+						size.y = 50;
+					}
+					road.setSize(size);
+					window.draw(road);
+					ptr = ptr->next;
 				}
-				road.setSize(size);
-				// window.draw(road);
-				ptr = ptr->next;
 			}
-		}
 
+		}
+		int vertexcount = 0;
 		// drawing vertices
-		for (auto i = vertices.begin(); i != vertices.end(); i++) {
-			sf::RectangleShape shape(sf::Vector2f(50, 50));
-			shape.setPosition(i->second);
-			shape.setOrigin(sf::Vector2f(25,25));
-			shape.setFillColor(sf::Color::White);
-			window.draw(shape);
+		int flag = 0;
+		for (auto i = vertices.begin(); i != vertices.end(); ++i) {
+			if (i->first == 37) {
+				sf::RectangleShape shape(sf::Vector2f(120, 120));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
 
-			// drawing text
-			sf::Text text;
-			sf::Font font;
-			font.loadFromFile("Arial.ttf");
-			text.setFont(font);
-			text.setString(to_string(i->first));
-			text.setPosition(i->second);
-			text.setCharacterSize(24);
-			text.setFillColor(sf::Color::White);
-			window.draw(text);
+
+				//___TEXT______
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("School");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(120, 120);
+
+
+
+				window.draw(text);
+			}
+			else if (i->first == 38) {
+				sf::RectangleShape shape(sf::Vector2f(130, 120));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+
+
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Park");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(180, 120);
+
+
+
+				window.draw(text);
+
+
+
+
+
+			}
+			else if (i->first == 39) {
+				sf::RectangleShape shape(sf::Vector2f(250, 150));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 40) {
+				sf::RectangleShape shape(sf::Vector2f(110, 170));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 41) {
+				sf::RectangleShape shape(sf::Vector2f(140, 50));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 42) {
+				sf::RectangleShape shape(sf::Vector2f(110, 80));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 43) {
+				sf::RectangleShape shape(sf::Vector2f(90, 200));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 44) {
+				sf::RectangleShape shape(sf::Vector2f(50, 200));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 45) {
+				sf::RectangleShape shape(sf::Vector2f(120, 150));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 46) {
+				sf::RectangleShape shape(sf::Vector2f(130, 30));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 47) {
+				sf::RectangleShape shape(sf::Vector2f(120, 100));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 48) {
+				sf::RectangleShape shape(sf::Vector2f(130, 220));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 49) {
+				sf::RectangleShape shape(sf::Vector2f(250, 180));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 50) {
+				sf::RectangleShape shape(sf::Vector2f(60, 70));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 51) {
+				sf::RectangleShape shape(sf::Vector2f(190, 35));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first == 52) {
+				sf::RectangleShape shape(sf::Vector2f(190, 35));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::Red);
+				shape.setOutlineColor(sf::Color::Black);
+				shape.setOutlineThickness(2);
+				window.draw(shape);
+			}
+			else if (i->first < 37) {
+				sf::RectangleShape shape(sf::Vector2f(50, 50));
+				shape.setPosition(250, 0);
+				shape.setPosition(i->second);
+				shape.setFillColor(sf::Color::White);
+				if (flag == 0) {
+					flag = 1;
+					continue;
+				}
+				if (flag == 1)
+					window.draw(shape);
+			}
+
 		}
 
+
+		vertexcount++;
 
 		//sf::Vertex line[] = {
 		//	sf::Vertex(sf::Vector2f(0,0)),
