@@ -6,26 +6,23 @@ using namespace std;
 
 class Vehicle {
 public:
-	int destination;
-	int from, to;
 	sf::Vector2f position;
 	sf::Vector2f velocity;
 	sf::Color color;
-	int rotation;
+	float rotation;
 	sf::RectangleShape shape;
+	queue<int> route;
 	/*int width;
 	int height;*/
 	// int a, b;
 
-	Vehicle(Graph& graph, sf::Color color, int from, int destination) {
-		this->position = graph.vertices[from];
+	Vehicle(Graph& graph, sf::Color color, queue<int> route) {
+		this->position = graph.vertices[route.front()];
+		route.pop();
 		this->color = color;
-		this->from = from;
-		this->destination = destination;
 
-
-		this->to = getClosestVertex(graph, from);
-		this->velocity = calcVelocity(position, graph.vertices[to]);
+		// from is popped, to is in front
+		this->velocity = calcVelocity(position, graph.vertices[route.front()]);
 
 		shape.setSize(sf::Vector2f(30, 20));
 		shape.setPosition(position);
@@ -34,11 +31,11 @@ public:
 
 		/*width = 30;
 		height = 20;*/
-		cout << "Closest vertex from " << from << " is " << to << endl;
+		/*cout << "Closest vertex from " << from << " is " << to << endl;
 		cout << "From: " << from << endl;
 		cout << "To: " << to << endl;
 		cout << "Position: (" << position.x << ", " << position.y << ")" << endl;
-		cout << "Velocity: (" << velocity.x << ", " << velocity.y << ")" << endl << endl;
+		cout << "Velocity: (" << velocity.x << ", " << velocity.y << ")" << endl << endl;*/
 
 	}
 
@@ -46,10 +43,10 @@ public:
 	bool near(sf::Vector2f a, sf::Vector2f b) {
 		float x = abs(b.x - a.x);
 		float y = abs(b.y - a.y);
-		return (x < 5.0 && y < 5.0);
+		return (x < 50.0 && y < 50.0);
 	}
 
-	int getClosestVertex(Graph graph, int from) {
+	/*int getClosestVertex(Graph graph, int from) {
 		ListNode<float>* ptr = graph.dijkstra(from);
 
 		int i = 1;
@@ -65,42 +62,35 @@ public:
 		}
 
 		return closestVertex;
-	}
+	}*/
 
 	sf::Vector2f calcVelocity(sf::Vector2f a, sf::Vector2f b) {
-		sf::Vector2f vel = b - a;
-		vel.x /= 3;
-		vel.y /= 3;
+		sf::Vector2f vel = (b - a);
+		vel.x /= 2;
+		vel.y /= 2;
 		return vel;
 	}
 
 	void update(float dt, Graph graph) {
 		//cout << position.x << "," << position.y << "  " << graph.vertices[to].x << "," << graph.vertices[to].y << endl;
-		if (near(position, graph.vertices[to])) {
+		if (!route.empty() && near(position, graph.vertices[route.front()])) {
+			cout << "NEAR";
 			rotation = (rotation == 90 ? 0 : 90);
 
-			if (to == destination) {
-				from = destination;
-				to = destination;
-				velocity = sf::Vector2f(0, 0);
-				//position = sf::Vector2f(-100, -100);
-				rotation = 0;
-			}
-			else {
-				from = to;
-				to = getClosestVertex(graph, to);
-				velocity = calcVelocity(position, graph.vertices[to]);
+			int a = route.front();
+			route.pop();
+			
+			if (route.empty()) {
+				velocity.x = velocity.y = 0;
+				return;
 			}
 
-
-
-		}
-		else {
-			position += velocity * dt;
-			//cout << "Velocity: (" << velocity.x << ", " << velocity.y << ")" << endl;
+			int b = route.front();
+			velocity = calcVelocity(graph.vertices[a], graph.vertices[b]);
 		}
 
-
+		position += velocity * dt;
+		//cout << "Velocity: (" << velocity.x << ", " << velocity.y << ")" << endl;
 	}
 
 	void draw(sf::RenderWindow& window) {
