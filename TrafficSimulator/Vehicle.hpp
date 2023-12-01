@@ -11,12 +11,14 @@ public:
 	sf::Color color;
 	float rotation;
 	sf::RectangleShape shape;
-	queue<int> route;
+	queue<int>& route;
+	bool onScreen;
 	/*int width;
 	int height;*/
 	// int a, b;
 
-	Vehicle(Graph& graph, sf::Color color, queue<int> route) {
+	Vehicle(Graph& graph, sf::Color color, queue<int>& route) : route(route) {
+		onScreen = true;
 		this->position = graph.vertices[route.front()];
 		route.pop();
 		this->color = color;
@@ -26,8 +28,8 @@ public:
 
 		shape.setSize(sf::Vector2f(30, 20));
 		shape.setPosition(position);
-		rotation = velocity.x ? 0 : 90; // add more conditions
-		rotation = velocity.y ? 90 : 0;
+		rotation = velocity.x ? 0.f : 90.f; // add more conditions
+		rotation = velocity.y ? 90.f : 0.f;
 
 		/*width = 30;
 		height = 20;*/
@@ -43,7 +45,7 @@ public:
 	bool near(sf::Vector2f a, sf::Vector2f b) {
 		float x = abs(b.x - a.x);
 		float y = abs(b.y - a.y);
-		return (x < 50.0 && y < 50.0);
+		return (x < 5.f && y < 5.f);
 	}
 
 	/*int getClosestVertex(Graph graph, int from) {
@@ -71,26 +73,36 @@ public:
 		return vel;
 	}
 
-	void update(float dt, Graph graph) {
-		//cout << position.x << "," << position.y << "  " << graph.vertices[to].x << "," << graph.vertices[to].y << endl;
-		if (!route.empty() && near(position, graph.vertices[route.front()])) {
-			cout << "NEAR";
-			rotation = (rotation == 90 ? 0 : 90);
+	void print2f(sf::Vector2f v) {
+		cout << '(' << v.x << ", " << v.y << ')' << endl;
+	}
 
-			int a = route.front();
+	void update(float dt, Graph graph) {
+		cout << "Pos: ";
+		print2f(position);
+		if (!route.empty()) {
+			cout << "To:  ";
+			print2f(graph.vertices[route.front()]);
+		}
+		
+		if (!route.empty() && near(position, graph.vertices[route.front()])) {
+			cout << endl << "NEAR";
+			rotation = (rotation == 90.f ? 0.f : 90.f);
+
+			int a = route.front(); // from
 			route.pop();
 			
 			if (route.empty()) {
 				velocity.x = velocity.y = 0;
+				onScreen = false;
 				return;
 			}
 
-			int b = route.front();
+			int b = route.front(); // to
 			velocity = calcVelocity(graph.vertices[a], graph.vertices[b]);
 		}
 
 		position += velocity * dt;
-		//cout << "Velocity: (" << velocity.x << ", " << velocity.y << ")" << endl;
 	}
 
 	void draw(sf::RenderWindow& window) {
