@@ -68,8 +68,28 @@ public:
 
 	sf::Vector2f calcVelocity(sf::Vector2f a, sf::Vector2f b) {
 		sf::Vector2f vel = (b - a);
-		vel.x /= 2;
-		vel.y /= 2;
+		float maxLimit = 200;
+
+		/*if (abs(vel.x) < 10) vel.x = 0;
+		if (abs(vel.y) < 10) vel.y = 0;*/
+
+		if (vel.y == 0 && vel.x != 0) {
+			if (vel.x > maxLimit) vel.x = maxLimit;
+			else if (vel.x > 0 && vel.x < maxLimit) vel.x = maxLimit;
+			else if (vel.x < 0 && vel.x > -maxLimit) vel.x = -maxLimit;
+			else if (vel.x < -maxLimit) vel.x = -maxLimit;
+		}
+		else if (vel.x == 0 && vel.y != 0) {
+			if (vel.y > maxLimit) vel.y = maxLimit;
+			else if (vel.y > 0 && vel.y < maxLimit) vel.y = maxLimit;
+			else if (vel.y < 0 && vel.y > -maxLimit) vel.y = -maxLimit;
+			else if (vel.y < -maxLimit) vel.y = -maxLimit;
+		}
+		/*else {
+			vel.x = 0;
+			vel.y = 0;
+		}*/
+
 		return vel;
 	}
 
@@ -84,13 +104,13 @@ public:
 			cout << "To:  ";
 			print2f(graph.vertices[route.front()]);
 		}
-		
+
 		if (!route.empty() && near(position, graph.vertices[route.front()])) {
 			cout << endl << "NEAR";
 
 			int a = route.front(); // from
 			route.pop();
-			
+
 			if (route.empty()) {
 				velocity.x = velocity.y = 0;
 				onScreen = false;
