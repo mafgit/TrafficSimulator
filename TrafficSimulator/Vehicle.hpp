@@ -87,7 +87,6 @@ public:
 		
 		if (!route.empty() && near(position, graph.vertices[route.front()])) {
 			cout << endl << "NEAR";
-			rotation = (rotation == 90.f ? 0.f : 90.f);
 
 			int a = route.front(); // from
 			route.pop();
@@ -100,6 +99,11 @@ public:
 
 			int b = route.front(); // to
 			velocity = calcVelocity(graph.vertices[a], graph.vertices[b]);
+			//rotation
+			if (velocity.x > 0) rotation = 0.f;
+			else if (velocity.x < 0) rotation = 180.f;
+			else if (velocity.y > 0) rotation = 90.f;
+			else if (velocity.y < 0) rotation = 270.f;
 		}
 
 		position += velocity * dt;
