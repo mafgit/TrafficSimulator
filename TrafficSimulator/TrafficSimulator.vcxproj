@@ -26,6 +26,7 @@
     <ClInclude Include="Edge.hpp" />
     <ClInclude Include="Graph.hpp" />
     <ClInclude Include="ListNode.hpp" />
+    <ClInclude Include="TrafficLight.hpp" />
     <ClInclude Include="Vehicle.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
