@@ -7,23 +7,24 @@ class TrafficLight {
 public:
 	sf::Color color;
 	sf::Vector2f position;
-	sf::RectangleShape box;
+	sf::CircleShape* circle;
 	bool red;
 	float timer;
 
 	TrafficLight(sf::Vector2f position) {
 		this->position = position;
 		color = sf::Color::Red;
-		box.setFillColor(color);
 		red = true;
 		timer = 0;
+		circle = new sf::CircleShape();
 	}
 
 	void draw(sf::RenderWindow& window) {
 		//box.setRotation(rotation);
-		box.setSize(sf::Vector2f(30, 20));
-		box.setPosition(position);
-		window.draw(box);
+		circle->setPosition(position);
+		circle->setRadius(20);
+		circle->setFillColor(color);
+		window.draw(*circle);
 	}
 
 	bool isRed() const { return red; }
@@ -32,15 +33,17 @@ public:
 		timer += dt;
 
 		if (timer > 5) {
-			box.setFillColor(sf::Color::Green);
+			color = sf::Color::Green;
+			circle->setFillColor(sf::Color::Green);
 			red = false;
 		}
 		else {
-			box.setFillColor(sf::Color::Red);
+			color = sf::Color::Red;
+			circle->setFillColor(sf::Color::Red);
 			red = true;
 		}
 
-		if (timer >= 10) {
+		if (timer > 10) {
 			timer = 0;
 		}
 	}

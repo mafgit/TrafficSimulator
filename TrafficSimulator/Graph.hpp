@@ -7,11 +7,13 @@ using namespace std;
 #define INF FLT_MAX
 
 class Graph {
-	map<int, ListNode<Edge>*> adjList;
 	int V;
 
 public:
+	map<int, ListNode<Edge>*> adjList;
 	map<int, sf::Vector2f> vertices;
+	ListNode<TrafficLight>* trafficLights;
+
 	Graph() {
 		V = 0;
 	}
@@ -23,36 +25,6 @@ public:
 	}
 
 	void draw(sf::RenderWindow& window) {
-
-		// drawing lines
-		bool flag1 = 0;
-		for (auto i = adjList.begin(); i != adjList.end(); i++) {
-			ListNode<Edge>* ptr = i->second;
-			while (ptr != NULL) {
-				sf::RectangleShape road;
-				if (flag1 == 0) {
-					flag1 = 1;
-					continue;
-				}
-
-				else {
-					road.setPosition(ptr->data.fromPos);
-					sf::Vector2f size = ptr->data.toPos - ptr->data.fromPos;
-
-					if (size.x < 50 && size.x > -50) {
-						size.x = 50;
-					}
-
-					if (size.y < 50 && size.y > -50) {
-						size.y = 50;
-					}
-					road.setSize(size);
-					window.draw(road);
-					ptr = ptr->next;
-				}
-			}
-
-		}
 		int vertexcount = 0;
 		// drawing vertices
 		int flag = 0;
@@ -67,7 +39,7 @@ public:
 				window.draw(shape);
 
 
-				//___TEXT______
+				//__TEXT___
 				sf::Text text;
 
 				sf::Font font;
@@ -81,7 +53,7 @@ public:
 				text.setCharacterSize(15); //15px
 				text.setFillColor(sf::Color::Yellow);
 				text.setStyle(sf::Text::Bold);
-				text.setPosition(120, 120);
+				text.setPosition(150, 120);
 
 
 
@@ -111,16 +83,8 @@ public:
 				text.setCharacterSize(15); //15px
 				text.setFillColor(sf::Color::Yellow);
 				text.setStyle(sf::Text::Bold);
-				text.setPosition(180, 120);
-
-
-
+				text.setPosition(240, 120);
 				window.draw(text);
-
-
-
-
-
 			}
 			else if (i->first == 39) {
 				sf::RectangleShape shape(sf::Vector2f(250, 150));
@@ -130,8 +94,27 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Hospital");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(200, 240);
+
+				window.draw(text);
+
 			}
-			else if (i->first == 40) {
+			else if (i->first == 40)
+			{
 				sf::RectangleShape shape(sf::Vector2f(110, 170));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -139,8 +122,30 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Mosque");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(470, 120);
+
+				window.draw(text);
+
+
+
 			}
-			else if (i->first == 41) {
+			else if (i->first == 41)
+			{
 				sf::RectangleShape shape(sf::Vector2f(140, 50));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -148,8 +153,29 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Nadra");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(600, 120);
+
+				window.draw(text);
+
+
 			}
-			else if (i->first == 42) {
+			else if (i->first == 42)
+			{
 				sf::RectangleShape shape(sf::Vector2f(110, 80));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -157,8 +183,28 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Mall");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(470, 300);
+
+				window.draw(text);
+
 			}
-			else if (i->first == 43) {
+			else if (i->first == 43)
+			{
 				sf::RectangleShape shape(sf::Vector2f(90, 200));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -166,8 +212,29 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Flats");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(570, 300);
+
+				window.draw(text);
+
+
 			}
-			else if (i->first == 44) {
+			else if (i->first == 44)
+			{
 				sf::RectangleShape shape(sf::Vector2f(50, 200));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -175,8 +242,29 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Hotel");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(650, 300);
+
+				window.draw(text);
+
+
 			}
-			else if (i->first == 45) {
+			else if (i->first == 45)
+			{
 				sf::RectangleShape shape(sf::Vector2f(120, 150));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -184,8 +272,28 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("Metro station");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(100, 500);
+
+				window.draw(text);
+
+
 			}
-			else if (i->first == 46) {
+			else if (i->first == 46)
+			{
 				sf::RectangleShape shape(sf::Vector2f(130, 30));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -193,8 +301,27 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+				sf::Text text;
+
+				sf::Font font;
+				if (!font.loadFromFile("Arial.ttf"))
+				{
+					cout << "Can't load font";
+				}
+
+				text.setFont(font);
+				text.setString("University");
+				text.setCharacterSize(15); //15px
+				text.setFillColor(sf::Color::Yellow);
+				text.setStyle(sf::Text::Bold);
+				text.setPosition(120, 720);
+
+				window.draw(text);
+
 			}
-			else if (i->first == 47) {
+			else if (i->first == 47)
+			{
 				sf::RectangleShape shape(sf::Vector2f(120, 100));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -202,8 +329,12 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
+
+
+
 			}
-			else if (i->first == 48) {
+			else if (i->first == 48)
+			{
 				sf::RectangleShape shape(sf::Vector2f(130, 220));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -264,7 +395,45 @@ public:
 		}
 
 
-		vertexcount++;
+
+		//vertexcount++;
+
+		// drawing edges
+		bool flag1 = 0;
+		for (auto i = adjList.begin(); i != adjList.end(); i++) {
+			ListNode<Edge>* ptr = i->second;
+			while (ptr != NULL) {
+				sf::RectangleShape road;
+				if (flag1 == 0) {
+					flag1 = 1;
+					continue;
+				}
+				else {
+					road.setPosition(ptr->data.fromPos);
+					sf::Vector2f size = ptr->data.toPos - ptr->data.fromPos;
+
+					if (size.x < 50 && size.x > -50) {
+						size.x = 50;
+					}
+
+					if (size.y < 50 && size.y > -50) {
+						size.y = 50;
+					}
+					road.setSize(size);
+					window.draw(road);
+				}
+				ptr = ptr->next;
+			}
+		}
+
+		for (auto i = adjList.begin(); i != adjList.end(); i++) {
+			ListNode<Edge>* ptr = i->second;
+
+			if ((ptr->data).trafficSignal) {
+				(ptr->data).trafficLight->draw(window);
+
+			}
+		}
 
 		//sf::Vertex line[] = {
 		//	sf::Vertex(sf::Vector2f(0,0)),
@@ -273,12 +442,25 @@ public:
 	}
 
 
-	void addEdge(int from, int to, float cost) {
+	void addEdge(int from, int to, float cost, bool trafficSignal = false) {
 		//cout << "(" << vertices[to].x << ", ";
-		//cout << vertices[to].y << ")\n";
+		//
+		// 
+		// 
+		// 
+		// 
+		// 
+		// 
+		// 
+		// 
+		//  << vertices[to].y << ")\n";
 		//cout << "(" << vertices[from].x << ", ";
 		//cout << vertices[from].y << ")\n\n";
-		push(adjList[from], Edge(from, to, vertices[from], vertices[to], cost)); // edge added for from ---> to
+		push(adjList[from], Edge(from, to, vertices[from], vertices[to], cost, trafficSignal)); // edge added for from ---> to
+		if (trafficSignal) {
+			TrafficLight t(vertices[to]);
+			push(trafficLights, t);
+		}
 	}
 
 	double getCost(int from, int to) {

@@ -32,3 +32,16 @@ template <typename T> void push(ListNode<T>*& head, T data) {
 
 	ptr->next = new ListNode<T>(data);
 }
+
+template<typename T>
+void pop_front(ListNode<T>*& head) {
+	auto ptr = head;
+	while (ptr->next != NULL) {
+		ptr = ptr->next;
+	}
+	auto last = ptr->next;
+	delete last;
+	ptr->next = NULL;
+
+
+}

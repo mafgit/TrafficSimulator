@@ -8,6 +8,7 @@ class Vehicle {
 public:
 	sf::Vector2f position;
 	sf::Vector2f velocity;
+	sf::Vector2f tempVel;
 	sf::Color color;
 	float rotation;
 	sf::RectangleShape shape;
@@ -25,6 +26,8 @@ public:
 
 		// from is popped, to is in front
 		this->velocity = calcVelocity(position, graph.vertices[route.front()]);
+		if (!(velocity.x == 0 && velocity.y == 0))
+			tempVel = velocity;
 
 		shape.setSize(sf::Vector2f(30, 20));
 		shape.setPosition(position);
@@ -98,15 +101,31 @@ public:
 	}
 
 	void update(float dt, Graph graph) {
-		cout << "Pos: ";
-		print2f(position);
-		if (!route.empty()) {
-			cout << "To:  ";
-			print2f(graph.vertices[route.front()]);
+		//cout << "Pos: ";
+		//print2f(position);
+		//if (!route.empty()) {
+			//cout << "To:  ";
+			//print2f(graph.vertices[route.front()]);
+		//}
+
+		auto ptr = graph.trafficLights;
+		while (ptr != NULL) {
+			ptr->data.updateTraffic(dt);
+			if (near(position, ptr->data.position) && ptr->data.isRed()) {
+				cout << "YEAH" << endl;
+				if(!(velocity.x == 0 && velocity.y == 0))
+					tempVel = velocity;
+				velocity = sf::Vector2f(0,0);
+			}
+			else {
+				cout << "NAH" << endl;
+				velocity = tempVel;
+			}
+			ptr = ptr->next;
 		}
 
 		if (!route.empty() && near(position, graph.vertices[route.front()])) {
-			cout << endl << "NEAR";
+			//cout << endl << "NEAR";
 
 			int a = route.front(); // from
 			route.pop();
@@ -119,6 +138,8 @@ public:
 
 			int b = route.front(); // to
 			velocity = calcVelocity(graph.vertices[a], graph.vertices[b]);
+			if (!(velocity.x == 0 && velocity.y == 0))
+				tempVel = velocity;
 			//rotation
 			if (velocity.x > 0) rotation = 0.f;
 			else if (velocity.x < 0) rotation = 180.f;

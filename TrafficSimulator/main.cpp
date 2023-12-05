@@ -38,17 +38,18 @@ int main() {
 	route2.push(50);
 
 	Vehicle vehicles[] = {
-		Vehicle(graph, sf::Color::Cyan, route1),
-		Vehicle(graph, sf::Color::Green, route2)
+		Vehicle(graph, sf::Color::Cyan, route1)/*,
+		Vehicle(graph, sf::Color::Green, route2)*/
 
 	};
 	int numVehicles = sizeof(vehicles) / sizeof(Vehicle);
 
+	/*
 	TrafficLight lights[] = {
 		TrafficLight(sf::Vector2f(400, 400))
 	};
 	int numLights = sizeof(lights) / sizeof(TrafficLight);
-
+	*/
 	sf::RenderWindow window(sf::VideoMode(800, 800), "Traffic Simulator");
 	sf::Clock clock;
 	while (window.isOpen())
@@ -65,14 +66,14 @@ int main() {
 		graph.draw(window);
 
 		// Drawing traffic lights
-		for (int i = 0; i < numLights; i++) {
+		/*for (int i = 0; i < numLights; i++) {
 			lights[i].updateTraffic(dt);
 			lights[i].draw(window);
-			/*
-			if (lights[i].isRed()) {
-				vehicles[i].velocity = sf::Vector2f(0, 0);
-			}*/
-		}
+			
+			//if (lights[i].isRed()) {
+			//	vehicles[i].velocity = sf::Vector2f(0, 0);
+			//}
+		}*/
 
 		// drawing vehicles
 		for (int i = 0; i < numVehicles; i++) {
@@ -93,6 +94,16 @@ int main() {
 			//        vehicles[i].draw(window);*/
 			//    }
 			//}
+		}
+
+		for (auto i = graph.adjList.begin(); i != graph.adjList.end(); i++) {
+			ListNode<Edge>* ptr = i->second;
+
+			if ((ptr->data).trafficSignal) {
+				(ptr->data).trafficLight->updateTraffic(dt);
+				(ptr->data).trafficLight->draw(window);
+
+			}
 		}
 
 		window.display();
