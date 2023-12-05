@@ -39,7 +39,7 @@ public:
 				window.draw(shape);
 
 
-				//__TEXT___
+				//___TEXT______
 				sf::Text text;
 
 				sf::Font font;
@@ -53,7 +53,7 @@ public:
 				text.setCharacterSize(15); //15px
 				text.setFillColor(sf::Color::Yellow);
 				text.setStyle(sf::Text::Bold);
-				text.setPosition(150, 120);
+				text.setPosition(120, 120);
 
 
 
@@ -83,8 +83,16 @@ public:
 				text.setCharacterSize(15); //15px
 				text.setFillColor(sf::Color::Yellow);
 				text.setStyle(sf::Text::Bold);
-				text.setPosition(240, 120);
+				text.setPosition(180, 120);
+
+
+
 				window.draw(text);
+
+
+
+
+
 			}
 			else if (i->first == 39) {
 				sf::RectangleShape shape(sf::Vector2f(250, 150));
@@ -94,27 +102,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("Hospital");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(200, 240);
-
-				window.draw(text);
-
 			}
-			else if (i->first == 40)
-			{
+			else if (i->first == 40) {
 				sf::RectangleShape shape(sf::Vector2f(110, 170));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -122,30 +111,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("Mosque");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(470, 120);
-
-				window.draw(text);
-
-
-
 			}
-			else if (i->first == 41)
-			{
+			else if (i->first == 41) {
 				sf::RectangleShape shape(sf::Vector2f(140, 50));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -153,29 +120,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("Nadra");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(600, 120);
-
-				window.draw(text);
-
-
 			}
-			else if (i->first == 42)
-			{
+			else if (i->first == 42) {
 				sf::RectangleShape shape(sf::Vector2f(110, 80));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -183,28 +129,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("Mall");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(470, 300);
-
-				window.draw(text);
-
 			}
-			else if (i->first == 43)
-			{
+			else if (i->first == 43) {
 				sf::RectangleShape shape(sf::Vector2f(90, 200));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -212,29 +138,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("Flats");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(570, 300);
-
-				window.draw(text);
-
-
 			}
-			else if (i->first == 44)
-			{
+			else if (i->first == 44) {
 				sf::RectangleShape shape(sf::Vector2f(50, 200));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -242,29 +147,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("Hotel");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(650, 300);
-
-				window.draw(text);
-
-
 			}
-			else if (i->first == 45)
-			{
+			else if (i->first == 45) {
 				sf::RectangleShape shape(sf::Vector2f(120, 150));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -272,28 +156,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("Metro station");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(100, 500);
-
-				window.draw(text);
-
-
 			}
-			else if (i->first == 46)
-			{
+			else if (i->first == 46) {
 				sf::RectangleShape shape(sf::Vector2f(130, 30));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -301,27 +165,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-				sf::Text text;
-
-				sf::Font font;
-				if (!font.loadFromFile("Arial.ttf"))
-				{
-					cout << "Can't load font";
-				}
-
-				text.setFont(font);
-				text.setString("University");
-				text.setCharacterSize(15); //15px
-				text.setFillColor(sf::Color::Yellow);
-				text.setStyle(sf::Text::Bold);
-				text.setPosition(120, 720);
-
-				window.draw(text);
-
 			}
-			else if (i->first == 47)
-			{
+			else if (i->first == 47) {
 				sf::RectangleShape shape(sf::Vector2f(120, 100));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -329,12 +174,8 @@ public:
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(2);
 				window.draw(shape);
-
-
-
 			}
-			else if (i->first == 48)
-			{
+			else if (i->first == 48) {
 				sf::RectangleShape shape(sf::Vector2f(130, 220));
 				shape.setPosition(250, 0);
 				shape.setPosition(i->second);
@@ -393,7 +234,6 @@ public:
 			}
 
 		}
-
 
 
 		//vertexcount++;
