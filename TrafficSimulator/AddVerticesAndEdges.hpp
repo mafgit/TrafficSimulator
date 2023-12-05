@@ -101,17 +101,17 @@ void add(Graph& graph) {
 	graph.addEdge(8, 11, 1);
 	graph.addEdge(11, 21, 1);
 
-	graph.addEdge(21, 18, 1, false);
+	graph.addEdge(21, 18, 1, true);
 	graph.addEdge(18, 8, 1);
 
 
-	graph.addEdge(30, 20, 1, false);
+	graph.addEdge(30, 20, 1, true);
 	graph.addEdge(20, 23, 1);
 
 	graph.addEdge(23, 33, 1);
 	graph.addEdge(33, 30, 1);
 
-	graph.addEdge(16, 19, 1, false);
+	graph.addEdge(16, 19, 1, true);
 	graph.addEdge(19, 29, 1);
 
 	graph.addEdge(29, 26, 1);

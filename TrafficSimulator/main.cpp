@@ -63,6 +63,7 @@ int main() {
 
 		window.clear();
 		float dt = clock.restart().asSeconds();
+
 		graph.draw(window);
 
 		// Drawing traffic lights
@@ -98,11 +99,12 @@ int main() {
 
 		for (auto i = graph.adjList.begin(); i != graph.adjList.end(); i++) {
 			ListNode<Edge>* ptr = i->second;
-
-			if ((ptr->data).trafficSignal) {
-				(ptr->data).trafficLight->updateTraffic(dt);
-				(ptr->data).trafficLight->draw(window);
-
+			while (ptr != NULL) {
+				if ((ptr->data).trafficSignal) {
+					(ptr->data).trafficLight->updateTraffic(dt);
+					(ptr->data).trafficLight->draw(window);
+				}
+				ptr = ptr->next;
 			}
 		}
 
